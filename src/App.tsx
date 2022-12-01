@@ -1,26 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useAuthRouters } from 'react-router-auth-plus'
+import NotAuth from './pages/403'
+import { useEffect, useLayoutEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useCurrentUserQuery } from './hooks/query'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // const navigate = useNavigate()
+  // const location = useLocation()
 
-  return (
-    <div className="App">
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+  // const { data, isFetching } = useCurrentUserQuery()
+
+  // useEffect(() => {
+  //   if (!localStorage.getItem('token') && location.pathname !== '/login') {
+  //     navigate('/login')
+  //   }
+  // }, [])
+
+  // useLayoutEffect(() => {
+  //   if (location.pathname === '/login' && data?.data.code === 0) {
+  //     navigate('/home')
+  //   }
+  // }, [data?.code])
+
+  return <div>app</div>
 }
 
 export default App

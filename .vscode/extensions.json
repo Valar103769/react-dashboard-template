@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "lihuiwang.vue-alias-skip",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
