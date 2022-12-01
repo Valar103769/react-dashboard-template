@@ -1,7 +1,3 @@
-import { apiGetCurrentUser } from '@/api'
-import { useLoginMutation } from '@/hooks/mutation'
-import { currentUserQueryKey } from '@/hooks/query/index'
-import { queryClient } from '@/main'
 import {
   TextInput,
   NumberInput,
@@ -9,11 +5,12 @@ import {
   Container,
   Center,
 } from '@mantine/core'
+import { $fetch } from 'ohmyfetch'
 import { useForm } from '@mantine/form'
 import { showNotification } from '@mantine/notifications'
 import { IconCheck, IconX } from '@tabler/icons'
 import { FC } from 'react'
-import { redirect } from 'react-router-dom'
+import apiFetch from '@/api'
 
 const Login: FC = () => {
   const form = useForm({
@@ -26,40 +23,32 @@ const Login: FC = () => {
     },
     validateInputOnChange: true,
   })
-  const { mutateAsync: login, loading } = useLoginMutation()
 
-  const handleFinish = async (values: any) => {
+  const handleLogin = async (values: any) => {
     console.log('values', values)
 
-    const data = await login(values)
+    const data = await apiFetch('/profile', {
+      method: 'POST',
+      headers: {
+        contentType: 'application/json',
+      },
+      body: {
+        values,
+      },
+    })
     console.log('data', data)
 
-    localStorage.setItem('token', data.email)
-    const userInfo = await queryClient.fetchQuery(
-      currentUserQueryKey,
-      apiGetCurrentUser
-    )
-
-    console.log('userInfo', userInfo)
+    localStorage.setItem('token', JSON.stringify('2133'))
 
     showNotification({
       icon: <IconCheck size={18} />,
       message: '登录成功',
     })
-    // redirect('/home')
-
-    //   if (data.code === 0) {
-    // } else {
-    //   showNotification({
-    //     color: 'red',
-    //     icon: <IconX size={18} />,
-    //     message: data.message,
-    //   })
-    // }
+    location.replace('/')
   }
   return (
     <Container>
-      <form onSubmit={form.onSubmit(handleFinish)}>
+      <form onSubmit={form.onSubmit(handleLogin)}>
         <TextInput
           label="Name"
           placeholder="Name"
@@ -71,7 +60,7 @@ const Login: FC = () => {
           placeholder="Email"
           {...form.getInputProps('email')}
         />
-        <Button type="submit" mt="sm" loading={loading}>
+        <Button type="submit" mt="sm">
           Submit
         </Button>
       </form>

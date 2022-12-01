@@ -1,10 +1,7 @@
-import { useAuthRouters } from 'react-router-auth-plus'
-import NotAuth from './pages/403'
-import { useEffect, useLayoutEffect } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { useCurrentUserQuery } from './hooks/query'
+import { FC } from 'react'
+import { Link, Outlet } from 'react-router-dom'
 
-function App() {
+const App: FC = () => {
   // const navigate = useNavigate()
   // const location = useLocation()
 
@@ -22,7 +19,24 @@ function App() {
   //   }
   // }, [data?.code])
 
-  return <div>app</div>
+  return (
+    <>
+      app
+      <Link to="/home" className="mx-4">
+        home
+      </Link>
+      <Link to="/dashboard" className="mx-4">
+        dashboard
+      </Link>
+      <Link to="/account/center" className="mx-4">
+        account-center
+      </Link>
+      <Link to="/login" className="mx-4">
+        login
+      </Link>
+      <Outlet></Outlet>
+    </>
+  )
 }
 
 export default App

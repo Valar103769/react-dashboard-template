@@ -6,11 +6,13 @@
   "packageManager": "pnpm@7.11.0",
   "scripts": {
     "dev": "vite",
+    "dev:mock": "vite --mode mock & pnpm run server:mock",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "prepare": "husky install",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "lint": "lint-staged"
+    "lint": "lint-staged",
+    "server:mock": "json-server --watch src/mock/db.json"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -39,6 +41,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
     "husky": "^8.0.2",
+    "json-server": "^0.17.1",
     "lint-staged": "^13.0.4",
     "postcss": "^8.4.19",
     "prettier": "^2.8.0",
